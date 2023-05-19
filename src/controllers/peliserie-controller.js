@@ -1,5 +1,5 @@
 import { Router } from "express";
-import PeliserieServices from "../../services/peliserie-services.js";
+import PeliserieServices from "../services/peliserie-services.js";
 const router = Router();
 // const PeliserieServices = new PeliserieServices();
 

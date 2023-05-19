@@ -26,11 +26,31 @@ class PersonajeServices {
     }
 
     static insert = async personaje => {
-        
+        const { Imagen, Nombre, Edad, Peso, Historia, Id_Peliserie } = personaje;
+        console.log("Personaje:", Nombre);
+        const request = new sql.Request(pool);
+        request
+        .input("Imagen", sql.NVarChar(4000), Imagen)
+        .input("Nombre", sql.NVarChar(50), Nombre)
+        .input("Edad", sql.Int, Edad)
+        .input("Peso", sql.Float, Peso)
+        .input("Historia", sql.NVarChar(4000), Historia)
+        .input("Id_Peliserie", sql.Int, Id_Peliserie)
+        .execute("postPersonaje");
+        return personaje;
     }
 
     static update = async personaje => {
-        
+        const { Id, Edad, Peso, Historia } = personaje;
+        console.log("Personaje a actualizar:", Id);
+        const request = new sql.Request(pool);
+        request
+        .input("id", sql.Int, Id)
+        .input("Edad", sql.Int, Edad)
+        .input("Peso", sql.Float, Peso)
+        .input("Historia", sql.NVarChar(4000), Historia)
+        .execute("putPersonaje");
+        return personaje;
     }
 
     static deleteById = async id => {

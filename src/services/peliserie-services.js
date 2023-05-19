@@ -25,12 +25,28 @@ class PeliserieServices {
         return returnEntity;
     }
 
-    static insert = async personaje => {
-        
+    static insert = async peliserie => {
+        const { Imagen, Titulo, Fecha_Creacion, Calificacion } = peliserie;
+        console.log("Pelicula/Serie:", Titulo);
+        const request = new sql.Request(pool);
+        request
+        .input("Imagen", sql.NVarChar(999), Imagen)
+        .input("Titulo", sql.NVarChar(50), Titulo)
+        .input("Fecha_Creacion", sql.Date, Fecha_Creacion)
+        .input("Calificacion", sql.Float, Calificacion)
+        .execute("postPeliserie");
+        return peliserie;
     }
 
-    static update = async personaje => {
-        
+    static update = async peliserie => {
+        const { Id, Calificacion } = peliserie;
+        console.log("Pelicula/Serie a actualizar:", Id);
+        const request = new sql.Request(pool);
+        request
+        .input("id", sql.Int, Id)
+        .input("Calificacion", sql.Float, Calificacion)
+        .execute("putPeliserie");
+        return peliserie;
     }
 
     static deleteById = async id => {
