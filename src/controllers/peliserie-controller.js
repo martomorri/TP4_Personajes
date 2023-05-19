@@ -7,7 +7,15 @@ const router = Router();
 
 router.get('', async (req, res) => {
     const peliseries = await PeliserieServices.getAll();
-    // res.send("GetAll");
+    if (peliseries) {
+        return res.status(200).json({"peliseries":peliseries});
+    } else {
+        return res.status(500).send("Error del servidor");
+    }
+});
+
+router.get('/:order', async (req, res) => {
+    const peliseries = await PeliserieServices.getAllOrdered(req.params.order);
     if (peliseries) {
         return res.status(200).json({"peliseries":peliseries});
     } else {
@@ -17,6 +25,15 @@ router.get('', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const peliserie = await PeliserieServices.getById(req.params.id);
+    if (peliserie) {
+        return res.status(200).json(peliserie);
+    } else {
+        return res.status(404).send("La peliserie no fue encontrada");
+    }
+});
+
+router.get('/:name', async (req, res) => {
+    const peliserie = await PeliserieServices.getByName(req.params.name);
     if (peliserie) {
         return res.status(200).json(peliserie);
     } else {

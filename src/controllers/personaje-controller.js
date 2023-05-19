@@ -24,6 +24,33 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/:name', async (req, res) => {
+    const personaje = await PersonajeServices.getByName(req.params.name);
+    if (personaje) {
+        return res.status(200).json(personaje);
+    } else {
+        return res.status(404).send("El personaje no fue encontrado");
+    }
+});
+
+router.get('/:age', async (req, res) => {
+    const personaje = await PersonajeServices.getByAge(req.params.age);
+    if (personaje) {
+        return res.status(200).json(personaje);
+    } else {
+        return res.status(404).send("El personaje no fue encontrado");
+    }
+});
+
+router.get('/:idMovie', async (req, res) => {
+    const personaje = await PersonajeServices.getByIdMovie(req.params.idMovie);
+    if (personaje) {
+        return res.status(200).json(personaje);
+    } else {
+        return res.status(404).send("El personaje no fue encontrado");
+    }
+});
+
 router.post('', async (req, res) => {
     const personaje = await PersonajeServices.insert(req.body);
     if (personaje) {

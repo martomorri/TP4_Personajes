@@ -11,6 +11,48 @@ class PersonajeServices {
         return result.recordsets[0];
     }
 
+    static getByAge = async edad => {
+        let returnEntity = null;
+        console.log("getByAge(edad)");
+        try {
+            let result = await pool.request()
+                .input("Edad", sql.Int, edad)
+                .execute("getPersonajeByAge");
+            returnEntity = result.recordsets[0][0];
+        } catch (error) {
+            console.log(error);
+        }
+        return returnEntity;
+    }
+
+    static getByName = async name => {
+        let returnEntity = null;
+        console.log("getByName(name)");
+        try {
+            let result = await pool.request()
+                .input("Nombre", sql.NVarChar(50), name)
+                .execute("getPersonajeByName");
+            returnEntity = result.recordsets[0][0];
+        } catch (error) {
+            console.log(error);
+        }
+        return returnEntity;
+    }
+
+    static getByIdMovie = async id => {
+        let returnEntity = null;
+        console.log("getByMovie(id)");
+        try {
+            let result = await pool.request()
+                .input("Id_Peliserie", sql.Int, id)
+                .execute("getPersonajeByIdMovie");
+            returnEntity = result.recordsets[0][0];
+        } catch (error) {
+            console.log(error);
+        }
+        return returnEntity;
+    }
+
     static getById = async id => {
         let returnEntity = null;
         console.log("getById(id)");
