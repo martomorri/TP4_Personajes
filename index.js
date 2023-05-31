@@ -8,6 +8,7 @@ const port = 5000;
 
 app.use(cors());
 app.use(express.json());
+console.log(PersonajeRouter);
 app.use("/api/personajes/", PersonajeRouter);
 app.use("/api/peliseries/", PeliserieRouter);
 

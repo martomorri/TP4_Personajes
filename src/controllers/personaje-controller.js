@@ -15,8 +15,25 @@ router.get('', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
-    const personaje = await PersonajeServices.getById(req.params.id);
+router.get('/:type/:p', async (req, res) => {
+    // console.log(req);
+    let personaje = null;
+    console.log(req.params);
+    switch (req.params.type) {
+        case "id":
+            personaje = await PersonajeServices.getById(req.params.p);
+            break;
+        case "name":
+            personaje = await PersonajeServices.getByName(req.params.p);
+            break;
+        case "age":
+            personaje = await PersonajeServices.getByAge(req.params.p);
+            break;
+        case "idMovie":
+            personaje = await PersonajeServices.getByIdMovie(req.params.p);
+            break;
+    }
+    // const personaje = await PersonajeServices.getById(req.params.id);
     if (personaje) {
         return res.status(200).json(personaje);
     } else {
@@ -24,32 +41,34 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/:name', async (req, res) => {
-    const personaje = await PersonajeServices.getByName(req.params.name);
-    if (personaje) {
-        return res.status(200).json(personaje);
-    } else {
-        return res.status(404).send("El personaje no fue encontrado");
-    }
-});
+// router.get('/name/:', async (req, res) => {
+//     // console.log(req.params);
+//     const personaje = await PersonajeServices.getByName(req.params.name);
+//     if (personaje) {
+//         return res.status(200).json(personaje);
+//     } else {
+//         return res.status(404).send("El personaje no fue encontrado");
+//     }
+// });
 
-router.get('/:age', async (req, res) => {
-    const personaje = await PersonajeServices.getByAge(req.params.age);
-    if (personaje) {
-        return res.status(200).json(personaje);
-    } else {
-        return res.status(404).send("El personaje no fue encontrado");
-    }
-});
+// router.get('/age/:', async (req, res) => {
+//     // console.log(req);
+//     const personaje = await PersonajeServices.getByAge(req.params.age);
+//     if (personaje) {
+//         return res.status(200).json(personaje);
+//     } else {
+//         return res.status(404).send("El personaje no fue encontrado");
+//     }
+// });
 
-router.get('/:idMovie', async (req, res) => {
-    const personaje = await PersonajeServices.getByIdMovie(req.params.idMovie);
-    if (personaje) {
-        return res.status(200).json(personaje);
-    } else {
-        return res.status(404).send("El personaje no fue encontrado");
-    }
-});
+// router.get('/idMovie', async (req, res) => {
+//     const personaje = await PersonajeServices.getByIdMovie(req.params.idMovie);
+//     if (personaje) {
+//         return res.status(200).json(personaje);
+//     } else {
+//         return res.status(404).send("El personaje no fue encontrado");
+//     }
+// });
 
 router.post('', async (req, res) => {
     const personaje = await PersonajeServices.insert(req.body);

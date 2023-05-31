@@ -23,8 +23,16 @@ router.get('/:order', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
-    const peliserie = await PeliserieServices.getById(req.params.id);
+router.get('/:type/:p', async (req, res) => {
+    let peliserie = null;
+    switch (req.params.type) {
+        case "id":
+            personaje = await PersonajeServices.getById(req.params.p);
+            break;
+        case "name":
+            personaje = await PersonajeServices.getByName(req.params.p);
+            break;
+    }
     if (peliserie) {
         return res.status(200).json(peliserie);
     } else {
@@ -32,14 +40,14 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/:name', async (req, res) => {
-    const peliserie = await PeliserieServices.getByName(req.params.name);
-    if (peliserie) {
-        return res.status(200).json(peliserie);
-    } else {
-        return res.status(404).send("La peliserie no fue encontrada");
-    }
-});
+// router.get('/:name', async (req, res) => {
+//     const peliserie = await PeliserieServices.getByName(req.params.name);
+//     if (peliserie) {
+//         return res.status(200).json(peliserie);
+//     } else {
+//         return res.status(404).send("La peliserie no fue encontrada");
+//     }
+// });
 
 router.post('', async (req, res) => {
     const peliserie = await PeliserieServices.insert(req.body);
