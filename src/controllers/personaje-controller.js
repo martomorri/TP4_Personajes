@@ -41,7 +41,7 @@ router.get('/:type/:p', async (req, res) => {
     }
 });
 
-// router.get('/name/:', async (req, res) => {
+// router.get('/:nid', async (req, res) => {
 //     // console.log(req.params);
 //     const personaje = await PersonajeServices.getByName(req.params.name);
 //     if (personaje) {

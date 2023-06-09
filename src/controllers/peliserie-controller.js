@@ -27,10 +27,10 @@ router.get('/:type/:p', async (req, res) => {
     let peliserie = null;
     switch (req.params.type) {
         case "id":
-            personaje = await PersonajeServices.getById(req.params.p);
+            peliserie = await PeliserieServices.getById(req.params.p);
             break;
         case "name":
-            personaje = await PersonajeServices.getByName(req.params.p);
+            peliserie = await PeliserieServices.getByName(req.params.p);
             break;
     }
     if (peliserie) {

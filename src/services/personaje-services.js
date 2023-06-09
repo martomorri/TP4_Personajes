@@ -18,7 +18,7 @@ class PersonajeServices {
             let result = await pool.request()
                 .input("Edad", sql.Int, edad)
                 .execute("getPersonajeByAge");
-            returnEntity = result.recordsets[0][0];
+            returnEntity = result.recordsets[0];
         } catch (error) {
             console.log(error);
         }
@@ -45,8 +45,8 @@ class PersonajeServices {
         try {
             let result = await pool.request()
                 .input("Id_Peliserie", sql.Int, id)
-                .execute("getPersonajeByIdMovie");
-            returnEntity = result.recordsets[0][0];
+                .execute("getPersonajeByMovie");
+            returnEntity = result.recordsets[0];
         } catch (error) {
             console.log(error);
         }

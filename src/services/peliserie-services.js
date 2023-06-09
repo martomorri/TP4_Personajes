@@ -30,7 +30,7 @@ class PeliserieServices {
         console.log("getByName(Name)");
         try {
             let result = await pool.request()
-                .input("Titulo", sql.Int, Name)
+                .input("Titulo", sql.NVarChar(50), Name)
                 .execute("getPeliserieByName");
             returnEntity = result.recordsets[0][0];
         } catch (error) {
